@@ -19,3 +19,10 @@ Garums = D + S = √1^2+1^2 = √2 ~ 1.41 (41% ātrāk)
 1. Bez .Normalized() tainsstūris pa diagonāli kustas par aptuveni 41.4% ātrāk. Izmantojot .Normalized(), vektora garums tiek saīsināts līdz 1.0, saglabājot vienmērīgu ātrumu visos virzienos.
 
 2. Godot funkcija MoveAndSlide() jau pati automātiski reizina Velocity (ātrumu) ar kadru laika starpību (delta). Ja reizina to otreiz tad kustība kļūst par lēnu.
+
+
+## Stunda 2.3
+
+100 = viss kartībā
+20 vai zem = uzmanību
+0 = spēle beigusies
