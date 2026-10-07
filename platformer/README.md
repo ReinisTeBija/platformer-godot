@@ -26,3 +26,16 @@ Garums = D + S = √1^2+1^2 = √2 ~ 1.41 (41% ātrāk)
 100 = viss kartībā
 20 vai zem = uzmanību
 0 = spēle beigusies
+
+
+## public override void _PhysicsProcess(double delta)
+   # {
+		Vector2 direction = Vector2.Zero;
+		if (Input.IsActionPressed("move_left")) direction.X -= 1;
+		if (Input.IsActionPressed("move_right")) direction.X += 1;
+		if (Input.IsActionPressed("move_up")) direction.Y -= 1;
+		if (Input.IsActionPressed("move_down")) direction.Y += 1;
+
+		Velocity = direction.Normalized() * Speed;
+		MoveAndSlide();
+  #  }
