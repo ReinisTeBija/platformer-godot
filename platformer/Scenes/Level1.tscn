@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ch7lxc3ysrljr"]
 
 [ext_resource type="PackedScene" uid="uid://wkcam2kuolhf" path="res://Scenes/Player.tscn" id="1_2llne"]
+[ext_resource type="Script" uid="uid://c35wtfflxv3ut" path="res://Scripts/Level.cs" id="1_joc8x"]
 [ext_resource type="PackedScene" uid="uid://wfjvoibvumck" path="res://Scenes/Pickup.tscn" id="2_q12u6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fdtjk"]
@@ -9,7 +10,14 @@ size = Vector2(1280, 40)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_080bb"]
 size = Vector2(160, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5rw1l"]
+size = Vector2(48, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_neug3"]
+size = Vector2(80, 30)
+
 [node name="Level1" type="Node2D" unique_id=1794061769]
+script = ExtResource("1_joc8x")
 
 [node name="Player" parent="." unique_id=516351954 instance=ExtResource("1_2llne")]
 position = Vector2(80, 570)
@@ -67,6 +75,54 @@ position = Vector2(680, 360)
 Type = 2
 
 [node name="Gem" parent="." unique_id=333916360 instance=ExtResource("2_q12u6")]
-modulate = Color(0.8559363, 0.43710443, 0.9290218, 1)
+modulate = Color(0.8352941, 0.36862746, 0.8392157, 1)
+self_modulate = Color(0.8344337, 0.36731914, 0.8385349, 1)
 position = Vector2(800, 600)
 Type = 1
+
+[node name="Finish" type="Area2D" parent="." unique_id=1436621456]
+position = Vector2(850, 590)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Finish" unique_id=882282479]
+shape = SubResource("RectangleShape2D_5rw1l")
+
+[node name="Visual" type="Polygon2D" parent="Finish" unique_id=1887771026]
+color = Color(0.12825611, 0.9845769, 0.6243934, 1)
+polygon = PackedVector2Array(-24, -50, 24, -50, 24, 50, -24, 50)
+
+[node name="Hazard" type="Area2D" parent="." unique_id=1802634602]
+position = Vector2(440, 625)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard" unique_id=1063990234]
+shape = SubResource("RectangleShape2D_neug3")
+
+[node name="Visual" type="Polygon2D" parent="Hazard" unique_id=643915348]
+color = Color(1, 0.20392157, 0.1764706, 1)
+polygon = PackedVector2Array(-40, -15, 40, -15, 40, 15, -40, 15)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=913670180]
+
+[node name="Instructions" type="Label" parent="HUD" unique_id=427269980]
+offset_left = 20.0
+offset_top = 16.0
+offset_right = 1260.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 20
+autowrap_mode = 3
+
+[node name="Status" type="Label" parent="HUD" unique_id=1913728566]
+offset_left = 20.0
+offset_top = 48.0
+offset_right = 1260.0
+offset_bottom = 96.0
+theme_override_font_sizes/font_size = 20
+autowrap_mode = 3
+
+[node name="Message" type="Label" parent="HUD" unique_id=850540285]
+offset_left = 20.0
+offset_top = 80.0
+offset_right = 1260.0
+offset_bottom = 128.0
+theme_override_font_sizes/font_size = 20
+text = "Pārbaude"
+autowrap_mode = 3
