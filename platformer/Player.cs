@@ -10,29 +10,39 @@ public partial class Player : CharacterBody2D
     public int Score { get; private set; } = 0;
     public bool HasKey { get; private set; } = false;
     public bool IsActive { get; set; } = true;
+    public float GravityMultiplier { get; set; } = 1.0f;
 
-   public override void _PhysicsProcess(double delta)
-{
-    if (!IsActive)
+    private Sprite2D sprite;
+
+    public override void _Ready()
     {
-        Velocity = Vector2.Zero;
-        return;
+        sprite = GetNode<Sprite2D>("Sprite");
     }
 
-    Vector2 velocity = Velocity;
-    if (!IsOnFloor())
-        velocity.Y += Gravity * (float)delta;
+    public override void _PhysicsProcess(double delta)
+    {
+        if (!IsActive)
+        {
+            Velocity = Vector2.Zero;
+            return;
+        }
 
-    
-    if (Input.IsActionJustPressed("jump") && IsOnFloor())
-    velocity.Y = JumpVelocity;
+        Vector2 velocity = Velocity;
+        if (!IsOnFloor())
+            velocity.Y += Gravity * GravityMultiplier * (float)delta;
 
-    velocity.X = Input.GetAxis("move_left", "move_right") * Speed;
-    Velocity = velocity;
-    MoveAndSlide();
+        if (Input.IsActionJustPressed("jump") && IsOnFloor())
+            velocity.Y = JumpVelocity;
 
-    
-}
+        velocity.X = Input.GetAxis("move_left", "move_right") * Speed;
+        Velocity = velocity;
+        MoveAndSlide();
+
+        // Astronauts sprite skatās pa kreisi, tāpēc apgriežam, kad iet pa labi
+        if (velocity.X != 0)
+            sprite.FlipH = velocity.X > 0;
+    }
+
     public void OnPickup(PickupType type)
     {
         if (!IsActive) return;
@@ -53,3 +63,4 @@ public partial class Player : CharacterBody2D
         GD.Print($"Punkti: {Score}; atslēga: {HasKey}");
     }
 }
+

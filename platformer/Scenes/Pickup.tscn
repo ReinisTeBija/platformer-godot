@@ -1,16 +1,20 @@
 [gd_scene format=3 uid="uid://wfjvoibvumck"]
 
 [ext_resource type="Script" uid="uid://dg6c311qbglvb" path="res://Scripts/Pickup.cs" id="1_eq05r"]
+[ext_resource type="Texture2D" uid="uid://botf1qhc3tpm8" path="res://Assets/coin_crystal.png" id="2_vwyx8"]
+[ext_resource type="Texture2D" uid="uid://dfx2a15i2h2wa" path="res://Assets/gem_orb.png" id="3_u602f"]
+[ext_resource type="Texture2D" uid="uid://dc2fhtr04fpxa" path="res://Assets/key.png" id="4_ip6op"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fdtjk"]
 radius = 12.0
 
 [node name="Pickup" type="Area2D" unique_id=927968909]
 script = ExtResource("1_eq05r")
+CoinTexture = ExtResource("2_vwyx8")
+GemTexture = ExtResource("3_u602f")
+KeyTexture = ExtResource("4_ip6op")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2098866844]
 shape = SubResource("CircleShape2D_fdtjk")
 
-[node name="Visual" type="Polygon2D" parent="." unique_id=2135057757]
-color = Color(0.827451, 0.8901961, 0.09019608, 1)
-polygon = PackedVector2Array(0, -12, 12, 0, 0, 12, -12, 0)
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2065825875]

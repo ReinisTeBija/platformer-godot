@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://wkcam2kuolhf"]
 
 [ext_resource type="Script" uid="uid://bcsu5onmjpvof" path="res://Player.cs" id="1_xhfnw"]
+[ext_resource type="Texture2D" uid="uid://baa45nbmbm5rs" path="res://Assets/astronaut.png" id="2_kyqiw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fdtjk"]
 size = Vector2(32, 48)
@@ -9,8 +10,9 @@ size = Vector2(32, 48)
 visibility_layer = 2
 script = ExtResource("1_xhfnw")
 
-[node name="Visual" type="Polygon2D" parent="." unique_id=248953370]
-polygon = PackedVector2Array(-16, -24, 16, -24, 16, 24, -16, 24)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1436418101]
 shape = SubResource("RectangleShape2D_fdtjk")
+
+[node name="Sprite" type="Sprite2D" parent="." unique_id=1249780264]
+position = Vector2(0, -4)
+texture = ExtResource("2_kyqiw")

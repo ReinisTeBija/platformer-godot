@@ -3,6 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://wkcam2kuolhf" path="res://Scenes/Player.tscn" id="1_2llne"]
 [ext_resource type="Script" uid="uid://c35wtfflxv3ut" path="res://Scripts/Level.cs" id="1_joc8x"]
 [ext_resource type="PackedScene" uid="uid://wfjvoibvumck" path="res://Scenes/Pickup.tscn" id="2_q12u6"]
+[ext_resource type="Texture2D" uid="uid://da4e0ee6bk76q" path="res://Assets/moon_platform.png" id="3_jghel"]
+[ext_resource type="Texture2D" uid="uid://d2nygr451g8tp" path="res://Assets/ship.png" id="5_t3or0"]
+[ext_resource type="Texture2D" uid="uid://cjrrv3s3frfrw" path="res://Assets/meteor.png" id="6_ysn8j"]
+[ext_resource type="Texture2D" uid="uid://c6pajs3hhuofc" path="res://Assets/background.png" id="7_ysn8j"]
+[ext_resource type="Script" uid="uid://djgrteokbo77e" path="res://Scripts/GravityZone.cs" id="8_6ll4n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fdtjk"]
 size = Vector2(1280, 40)
@@ -11,13 +16,21 @@ size = Vector2(1280, 40)
 size = Vector2(160, 20)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5rw1l"]
-size = Vector2(48, 100)
+size = Vector2(70, 100)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_neug3"]
-size = Vector2(80, 30)
+size = Vector2(44, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8toje"]
+size = Vector2(260, 440)
 
 [node name="Level1" type="Node2D" unique_id=1794061769]
 script = ExtResource("1_joc8x")
+GameTitle = "Lost In Space"
+Mission = "Atrodi atslēgu un sasniedz kosmosa kuģi, lai atgrieztos mājās. Izvairies no meteora!"
+WinText = "Kuģis ir gatavs pacelties! Tu tiki mājās!"
+LoseText = "Astronauts pazuda kosmosā. Mēģini vēlreiz!"
+LockedText = "Kuģis ir slēgts. Vispirms atrodi atslēgu!"
 
 [node name="Player" parent="." unique_id=516351954 instance=ExtResource("1_2llne")]
 position = Vector2(80, 570)
@@ -30,7 +43,7 @@ collision_layer = 3
 shape = SubResource("RectangleShape2D_fdtjk")
 
 [node name="Visual" type="Polygon2D" parent="Ground" unique_id=1671283083]
-color = Color(1, 0.22352941, 1, 1)
+color = Color(0.16862746, 0.1764706, 0.25882354, 1)
 polygon = PackedVector2Array(-640, -20, 640, -20, 640, 20, -640, 20)
 
 [node name="Platform1" type="StaticBody2D" parent="." unique_id=668703783]
@@ -39,8 +52,9 @@ position = Vector2(280, 560)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1" unique_id=635702107]
 shape = SubResource("RectangleShape2D_080bb")
 
-[node name="Visual" type="Polygon2D" parent="Platform1" unique_id=57496024]
-polygon = PackedVector2Array(-80, -10, 80, -10, 80, 10, -80, 10)
+[node name="Sprite2D" type="Sprite2D" parent="Platform1" unique_id=1763958835]
+position = Vector2(0, 22)
+texture = ExtResource("3_jghel")
 
 [node name="Platform2" type="StaticBody2D" parent="." unique_id=1213619219]
 position = Vector2(480, 470)
@@ -48,8 +62,9 @@ position = Vector2(480, 470)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2" unique_id=1554375424]
 shape = SubResource("RectangleShape2D_080bb")
 
-[node name="Visual" type="Polygon2D" parent="Platform2" unique_id=79110735]
-polygon = PackedVector2Array(-80, -10, 80, -10, 80, 10, -80, 10)
+[node name="Sprite2D" type="Sprite2D" parent="Platform2" unique_id=1096548102]
+position = Vector2(0, 22)
+texture = ExtResource("3_jghel")
 
 [node name="Platform3" type="StaticBody2D" parent="." unique_id=940288473]
 position = Vector2(680, 380)
@@ -57,8 +72,9 @@ position = Vector2(680, 380)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3" unique_id=1303992611]
 shape = SubResource("RectangleShape2D_080bb")
 
-[node name="Visual" type="Polygon2D" parent="Platform3" unique_id=47233440]
-polygon = PackedVector2Array(-80, -10, 80, -10, 80, 10, -80, 10)
+[node name="Sprite2D" type="Sprite2D" parent="Platform3" unique_id=492814981]
+position = Vector2(0, 22)
+texture = ExtResource("3_jghel")
 
 [node name="Coin1" parent="." unique_id=927968909 instance=ExtResource("2_q12u6")]
 position = Vector2(150, 600)
@@ -70,13 +86,10 @@ position = Vector2(280, 540)
 position = Vector2(480, 450)
 
 [node name="Key" parent="." unique_id=344927958 instance=ExtResource("2_q12u6")]
-modulate = Color(0.72868854, 0.48658824, 0.21616223, 1)
 position = Vector2(680, 360)
 Type = 2
 
 [node name="Gem" parent="." unique_id=333916360 instance=ExtResource("2_q12u6")]
-modulate = Color(0.8352941, 0.36862746, 0.8392157, 1)
-self_modulate = Color(0.8344337, 0.36731914, 0.8385349, 1)
 position = Vector2(800, 600)
 Type = 1
 
@@ -86,9 +99,8 @@ position = Vector2(850, 590)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Finish" unique_id=882282479]
 shape = SubResource("RectangleShape2D_5rw1l")
 
-[node name="Visual" type="Polygon2D" parent="Finish" unique_id=1887771026]
-color = Color(0.12825611, 0.9845769, 0.6243934, 1)
-polygon = PackedVector2Array(-24, -50, 24, -50, 24, 50, -24, 50)
+[node name="Sprite2D" type="Sprite2D" parent="Finish" unique_id=858231855]
+texture = ExtResource("5_t3or0")
 
 [node name="Hazard" type="Area2D" parent="." unique_id=1802634602]
 position = Vector2(440, 625)
@@ -96,9 +108,8 @@ position = Vector2(440, 625)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hazard" unique_id=1063990234]
 shape = SubResource("RectangleShape2D_neug3")
 
-[node name="Visual" type="Polygon2D" parent="Hazard" unique_id=643915348]
-color = Color(1, 0.20392157, 0.1764706, 1)
-polygon = PackedVector2Array(-40, -15, 40, -15, 40, 15, -40, 15)
+[node name="Sprite2D" type="Sprite2D" parent="Hazard" unique_id=472823693]
+texture = ExtResource("6_ysn8j")
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=913670180]
 
@@ -124,5 +135,28 @@ offset_top = 80.0
 offset_right = 1260.0
 offset_bottom = 128.0
 theme_override_font_sizes/font_size = 20
-text = "Pārbaude"
+text = "123"
 autowrap_mode = 3
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="." unique_id=1988181616]
+layer = -1
+
+[node name="TextureRect" type="TextureRect" parent="BackgroundLayer" unique_id=1741409126]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_ysn8j")
+
+[node name="LowGravityZone" type="Area2D" parent="." unique_id=1579741998]
+position = Vector2(780, 330)
+script = ExtResource("8_6ll4n")
+GravityMultiplier = 0.5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LowGravityZone" unique_id=130540320]
+shape = SubResource("RectangleShape2D_8toje")
+
+[node name="Polygon2D" type="Polygon2D" parent="LowGravityZone" unique_id=1519459471]
+color = Color(0.5803922, 0.8745098, 0.99215686, 0)
+polygon = PackedVector2Array(-130, -220, 130, -220, 130, 220, -130, 220)
